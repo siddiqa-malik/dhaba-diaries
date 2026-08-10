@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import RecipeDetailContent from "../../components/RecipeDetailContent";
-import { getRecipeBySlug } from "../../_lib/recipes";
+import RecipeDetailContent from "../../../components/RecipeDetailContent";
+import RecipeOverlay from "../../../components/RecipeOverlay";
+import { getRecipeBySlug } from "../../../_lib/recipes";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -21,14 +22,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function RecipeDetailPage({ params }: Props) {
+export default async function RecipeModalPage({ params }: Props) {
   const { slug } = await params;
   const recipe = getRecipeBySlug(slug);
   if (!recipe) notFound();
 
   return (
-    <article className="relative bg-card border border-border rounded p-8 pb-14 mt-10">
+    <RecipeOverlay>
       <RecipeDetailContent recipe={recipe} />
-    </article>
+    </RecipeOverlay>
   );
 }

@@ -13,12 +13,19 @@ export const metadata: Metadata = {
   description: "Real recipes, dhaba style.",
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({
+  children,
+  modal,
+}: {
+  children: ReactNode;
+  modal: ReactNode;
+}) {
   return (
     <html lang="en">
       <body className={`${fraunces.variable} ${workSans.variable} ${mono.variable}`}>
         <Navbar />
         <div className="max-w-[880px] mx-auto px-6 pb-20">{children}</div>
+        {modal}
       </body>
     </html>
   );
